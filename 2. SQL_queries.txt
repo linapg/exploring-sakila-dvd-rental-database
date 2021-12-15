@@ -1,0 +1,105 @@
+/*
+Question 1 
+What is the distribution of the family categories* rentals? 
+The following categories are considered family movies: Animation, Children, Classics, Comedy, Family and Music.
+*/
+
+WITH table1 AS(
+    SELECT r.rental_date AS rental_date,
+		c.name AS category
+    FROM film f
+    JOIN inventory i
+    ON f.film_id = i.film_id
+    JOIN rental r
+    ON i.inventory_id = r.inventory_id
+    JOIN film_category fc
+    ON f.film_id = fc.film_id
+    JOIN category c
+    ON c.category_id = fc.category_id
+    WHERE c.name IN ('Animation', 'Children', 'Classics', 'Comedy', 'Family','Music')
+    ORDER BY f.film_id)
+SELECT category, COUNT(*) AS number_of_rentals
+FROM table1
+GROUP BY category
+ORDER BY category;
+
+
+/*
+Question 2
+Which kind of rating has the longest average rental rates grouped by store?
+*/
+
+WITH t1 AS (
+	SELECT 	f.film_id AS movie_id,
+			f.rating AS film_rating,
+			f.rental_duration AS rental_duration,
+			i.store_id AS store,
+			ROUND(AVG(f.rental_duration) OVER(PARTITION BY f.rating), 1) AS average_rental
+	FROM film f
+	JOIN inventory i
+	ON f.film_id = i.inventory_id
+	GROUP BY 1, 2, 3, 4
+	ORDER BY 2)
+SELECT store, film_rating, average_rental
+FROM t1
+GROUP BY 1, 2, 3
+ORDER BY 1, 3;
+
+
+*/
+Question 3
+What are the top 5 paying customers for each store?
+*/
+
+WITH T1 AS(
+	SELECT p.customer_id AS customer_id, SUM(p.amount) AS payment, c.store_id AS store,
+	 (c.first_name || ' ' || c.last_name) AS customer_name, 
+	 DENSE_RANK() OVER (PARTITION BY c.store_id ORDER BY SUM(p.amount) DESC) AS top_5_rank
+	FROM payment p
+	JOIN customer c
+	ON p.customer_id = c.customer_id
+	GROUP BY 1, 3, 4
+	ORDER BY 5 
+	LIMIT 10)
+SELECT customer_name, store, payment
+FROM t1
+ORDER BY 2, 3 DESC;
+
+
+*/
+Question 4
+Which was the month with the most rentals in 2005?
+*/
+
+WITH T1 AS(
+	SELECT r.rental_id AS rental_id, r.rental_date AS date, i.store_id AS store,
+	DATE_TRUNC('year', r.rental_date) AS rental_year, EXTRACT(MONTH FROM r.rental_date) AS month_of_2005
+	FROM rental r
+	JOIN inventory i
+	ON r.inventory_id = i.inventory_id
+	WHERE r.rental_date BETWEEN '2005-01-01' AND '2005-12-31')
+SELECT month_of_2005, store,COUNT(*) AS number_of_rentals
+FROM t1
+GROUP BY 1, 2
+ORDER BY 1, 2, 3;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
