@@ -12,7 +12,7 @@ With SQL queries I explore the Sakila DVD Rental database to present insights ab
 
 4. Which was the month with the most rentals in 2005?  
   
-**Structure of the project:**. 
+**Structure of the project files:**  
 
 1. Exploring-sakila-DVD-rental-database.pdf (presentation with findings)
 2. SQL queries.
