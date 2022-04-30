@@ -1,4 +1,4 @@
-# exploring-sakila-dvd-rental-database
+# Exploring the Sakila DVD rental database
 With SQL queries I explore the Sakila DVD Rental database to present insights about the rental behaviour and patterns in movie watching across different customer groups.
 
 **The following questions are solved:**
@@ -10,4 +10,11 @@ With SQL queries I explore the Sakila DVD Rental database to present insights ab
 
 3. What are the top 5 paying customers for each store?
 
-4. Which was the month with the most rentals in 2005?
+4. Which was the month with the most rentals in 2005?  
+  
+**Structure of the project:**. 
+
+1. Exploring-sakila-DVD-rental-database.pdf (presentation with findings)
+2. SQL_queries.txt 
+3. DVD-rental-ERD.pdf
+4. PostgreSQL_sakila_installation (tutorial)
