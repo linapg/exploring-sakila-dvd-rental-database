@@ -15,6 +15,6 @@ With SQL queries I explore the Sakila DVD Rental database to present insights ab
 **Structure of the project:**. 
 
 1. Exploring-sakila-DVD-rental-database.pdf (presentation with findings)
-2. SQL_queries.txt 
-3. DVD-rental-ERD.pdf
-4. PostgreSQL_sakila_installation (tutorial)
+2. SQL queries.
+3. DVD rental ERD
+4. PostgreSQL sakila installation (tutorial)
